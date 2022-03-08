@@ -3,7 +3,7 @@ import mysql.connector
 
 
 try:
-	connection = mysql.connector.connect(host='localhost', user='root', password='', database='easylub')
+	connection = mysql.connector.connect(host='127.0.0.1', user='root', password='', database='easylub')
 	if connection.is_connected():
 		db_info = connection.get_server_info()
 		print("Conectado ao Servidor MySQL Versão ", db_info)

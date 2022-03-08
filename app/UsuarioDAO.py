@@ -1,4 +1,3 @@
-from os import getgid
 from user import User
 import mysql.connector
 from connection import getConnection, closeConnection

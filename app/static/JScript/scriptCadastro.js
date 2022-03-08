@@ -109,7 +109,7 @@ class Validator{
     passwordvalidate(input){
         let charArr = input.value.split("");
         let uppercases = 0;
-        let numbers = 0;
+        let numbers = 0;        
 
         for(let i = 0; charArr.length > i; i++){
             if(charArr[i] === charArr[i].toUpperCase() && isNaN(parseInt(charArr[i]))){
@@ -117,10 +117,14 @@ class Validator{
             }else if(!isNaN(parseInt(charArr[i]))) {
                 numbers++;
             }
-        }
-        if(uppercases === 0 || numbers === 0 ){
-            let errorMessage = 'A senha Precisa Conter ao menos um Letra Maiuscula e Um Número!';
-            this.printMessage(input, errorMessage);
+        }     
+            
+        if(uppercases === 0) {
+            let errorMessageL = 'A senha Precisa Conter ao menos um Letra Maiuscula!';            
+            window.alert(errorMessageL)
+        }else if(numbers === 0){
+            let errorMessageN = 'A Senha Precisa Conter ao Menos Um Número!';
+            window.alert(errorMessageN)
         }
     }
     
@@ -174,7 +178,8 @@ submit.addEventListener('click', function(e){
 
 });
 
-function cadastro(email, name, lastname, pass, confpass){
+function cadastro(email, name, lastname, pass, confpass){   
+
 	$.ajax({
 		type: "POST", 
 		url: "http://localhost:5000/cadastro",
@@ -184,7 +189,7 @@ function cadastro(email, name, lastname, pass, confpass){
 			nome : name,
 			lastname: lastname, 
 			senha: pass,
-			confpass: confpass
+			confpass: confpass            
 		}),
 		sucess: function(result){			
 				alert(result)
