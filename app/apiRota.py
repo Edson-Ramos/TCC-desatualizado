@@ -1,8 +1,10 @@
 import flask
 from flask.globals import request
 from flask.templating import render_template
+from equipamento import Equipamento
 from user import User
 import UsuarioDAO
+
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -105,7 +107,28 @@ def update_post():
 	return render_template('painel.html')
 
 
+@app.route('/cadastroMaquinas', methods = ['GET'])
+def cadastro_maquinas():
+	return render_template('cadastro_maquinas.html')
+
+
+
+@app.route('/cadastro_maquinas', methods=['POST'])
+def cadastro_maquina_post():	
+	nome_maquina = request.form['nome_equipamento']
+	id_maquina = request.form['id_equipamento']
+
+
+	equipamento = Equipamento(id_maquina, nome_maquina)
+	UsuarioDAO.insertEquipamentos(equipamento)
+	return render_template('painel.html')
+
 	
+
+	
+
+
+
 	
 
 

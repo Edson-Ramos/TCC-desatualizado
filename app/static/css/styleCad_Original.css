@@ -4,11 +4,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Helvetica, sans-serif;
-    color: #c5fa04;
+    color: #323232;
     border:none;
 }
-
-
 input, label{
     display: block;
     width: 100%;
@@ -21,44 +19,34 @@ a{
 }
 body{
     padding-top: 5vh;
-    background-image: url(../img/background.jpg);
+    background-image: url(../img/background3.jpg);
     background-size: cover;
 }
 /*Formulario*/
 #cadastroFunc-container{
-    background: rgba(255, 255, 255, 0.1);    
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-    margin-top: 50px;
-    margin-left: 450px;
-    margin-right: 450px;
-    padding-bottom: 30px;
-    padding-top: 30px;
-    border-radius: 20px;
-    
-    
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
 }
 #cadastroFunc-container h1{
     text-align: center;
     margin-bottom: 20px;
-    color: #ffea07;
 }
 form{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    
 }
 .full-box{
     flex: 1 1 100%;
     position: relative;
-    margin-left: 20px;
-    margin-right: 20px;
 }
 .half-box{
     flex: 1 1 45%;
     position: relative;
-    
 }
 .spacing{
     margin-right: 2.5%;
@@ -82,10 +70,7 @@ input[type="submit"]{
     border: none;
     border-radius: 20px;
     height: 40px;
-    width: 150px;
     cursor: pointer;
-    left: 50px;
-    margin-left: 70px;
 }
 input[type="submit"]:hover{
     background-color: black;
@@ -101,9 +86,7 @@ button{
     padding: 10px;
     font-size: .9rem;
     margin-bottom: 40px;
-    width: 150px;
-    margin-right: 50px;
-    
+    width: 220px;
 }
 button:hover{
     background-color: black;

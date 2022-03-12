@@ -1,0 +1,17 @@
+body{
+    padding-top: 5vh;
+    background-image: url(../img/background3.jpg);
+    background-size: cover;
+    text-align: center;
+    
+
+}
+#container{
+    padding-top: 50px;
+    width: 600px;
+    height: 300px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto; 
+  
+}

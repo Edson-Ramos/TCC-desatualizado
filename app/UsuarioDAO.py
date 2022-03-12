@@ -1,4 +1,5 @@
 from user import User
+from equipamento import Equipamento
 import mysql.connector
 from connection import getConnection, closeConnection
 
@@ -10,8 +11,19 @@ def closeConnection():
 
 def insertUser(user):
 	try:
-		sql_query = """INSERT INTO `usuario`(name , sobrenome, email , senha ) VALUES (%s,%s,%s,%s)"""
+		sql_query = """INSERT INTO `usuario`(nome , sobreNome, email , senha ) VALUES (%s,%s,%s,%s)"""
 		tuple = (user.getName(), user.getSobreNome(), user.getEmail(), user.getSenha())
+		cursor.execute(sql_query, tuple)
+		connection.commit()
+		print("Registro foi inserido com sucesso na Base de Dados!")
+	except mysql.connector.Error as error:
+		connection.rollback()
+		print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
+
+def insertEquipamentos(equipamento):
+	try:
+		sql_query = """INSERT INTO `maquina`(id, nome) VALUES (%s,%s)"""
+		tuple = (equipamento.getID(), equipamento.getNome())
 		cursor.execute(sql_query, tuple)
 		connection.commit()
 		print("Registro foi inserido com sucesso na Base de Dados!")
@@ -21,7 +33,7 @@ def insertUser(user):
 
 def updateUser(user):
     try:
-        sql_query = """UPDATE `usuario` SET name=%s, sobrenome=%s,email=%s, senha=%s WHERE id = %s;"""
+        sql_query = """UPDATE `usuario` SET nome=%s, sobreNome=%s,email=%s, senha=%s WHERE id = %s;"""
         tuple = (user.getName(), user.getSobreNome(), user.getEmail(), user.getSenha(), user.getId())
         cursor.execute(sql_query,tuple)
         connection.commit()
@@ -32,7 +44,7 @@ def updateUser(user):
 
 def listAllUsers():
     try:
-        sql_query = "SELECT * FROM `usuario`;"
+        sql_query = "SELECT * FROM usuario"
         cursor.execute(sql_query)
         result = cursor.fetchall()
         retorno = []

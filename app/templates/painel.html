@@ -23,25 +23,29 @@
             <h1>Painel de Controle</h1>
             <form action="" id="painel-form" method="">                
                 <div class="full-box">
-					<label for="">Liste os Usuários Cadastrados</label>
-					<input type="submit" name="listar" id="btn-listar" value="Lista Usuários">
+					<label for="">Liste Funcionários Cadastrados</label>
+					<button type="button" onclick="location.href='/lista'" id="btn-listar" class="btn-lista">Lista Usuário</button>
                 </div>
 				<div class="full-box">
-                    <label for="">Delete os Usuários Cadastrados</label>
+                    <label for="">Delete Funcionários Cadastrados</label>
                     <button type="button" onclick="location.href='/delete'" name="delete" id="btn-del" class="btn-del">Deletar Funcionarios</button>
                 </div>
 				<div class="full-box">
-                    <label for="">Altere os Usuários Cadastrados</label>
+                    <label for="">Altere os Dados do Funcionários</label>
                     <button type="button" onclick="location.href='/update'" name="update" id="btn-update" class="btn-update">Atualizar Funcionarios</button>
                 </div>
 				<div class="full-box">
-                    <label for="">Cadastre Usuário</label>
+                    <label for="">Cadastro de Funcionários</label>
                     <button type="button" onclick="location.href='/cadastro'" id="btn-cadas" class="btn-cadas">Cadastrar Funcionarios</button>
+                </div>
+                <div class="full-box">
+                    <label for="">Cadastro de Mquinas</label>
+                    <button type="button" onclick="location.href='/cadastroMaquinas'" id="btn-cadas" class="btn-cadas">Cadastrar Funcionarios</button>
                 </div>
             </form>    
 		</div>
         
         <p class="error-validation template"></p>
-        <script src="{{url_for('static', filename='JScript/scriptLogin.js')}}"></script>
+        <script src="{{url_for('static', filename='JScript/scriptPainel.js')}}"></script>
     </body>
 </html>
