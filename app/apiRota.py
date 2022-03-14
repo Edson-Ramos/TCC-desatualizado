@@ -114,19 +114,49 @@ def cadastro_maquinas():
 
 
 @app.route('/cadastro_maquinas', methods=['POST'])
-def cadastro_maquina_post():	
-	nome_maquina = request.form['nome_equipamento']
-	id_maquina = request.form['id_equipamento']
+def cadastro_maquina_post():
+	try:
+		dados = request.get_json()
+		id_maquina = dados["id"]
+		nome_maquina = dados["nome"]	
+		linha = dados["linha"]
+		trecho = dados["trecho"]
+		print(dados)
 
+		equipamento = Equipamento(id_maquina, nome_maquina, linha, trecho)
+		UsuarioDAO.insertEquipamentos(equipamento)
+		return "Equipamento Cadastrado com Sucesso!"
 
-	equipamento = Equipamento(id_maquina, nome_maquina)
-	UsuarioDAO.insertEquipamentos(equipamento)
-	return render_template('painel.html')
+	except:
+		return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500) 
 
-	
+resposta = []
+resposta = UsuarioDAO.listAllUsers()
 
-	
+@app.route("/listarUsuarios", methods=['GET'])
+def listar_usuarios():
+	return render_template('listarUsuarios.html')
 
+@app.route("/listar", methods=['GET'])
+def listar_Usuarios_Get():
+	resposta = {'files' : []}
+
+	for arquivos in UsuarioDAO.listAllUsers():
+		id_Usuario = arquivos.id
+		nome_Usuario = arquivos.name
+		email_Usuario = arquivos.email
+		sobreNome_Usuario = arquivos.sobrenome
+		senha_Usuario = arquivos.senha
+
+		file = {'id': id_Usuario,
+				 'nome': nome_Usuario,
+				 'sobreNome': sobreNome_Usuario,
+				 'email': email_Usuario,				 
+				 'senha': senha_Usuario}
+
+		resposta ['files'].append(file)
+
+	return(resposta)
 
 
 	

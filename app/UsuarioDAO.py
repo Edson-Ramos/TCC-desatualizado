@@ -22,14 +22,15 @@ def insertUser(user):
 
 def insertEquipamentos(equipamento):
 	try:
-		sql_query = """INSERT INTO `maquina`(id, nome) VALUES (%s,%s)"""
-		tuple = (equipamento.getID(), equipamento.getNome())
+		sql_query = """INSERT INTO `maquina`(idMaq, maq, linha, trecho ) VALUES (%s,%s,%s,%s)"""
+		tuple = (equipamento.getId(), equipamento.getNome(), equipamento.getLinha(), equipamento.getTrecho())
 		cursor.execute(sql_query, tuple)
 		connection.commit()
 		print("Registro foi inserido com sucesso na Base de Dados!")
 	except mysql.connector.Error as error:
 		connection.rollback()
 		print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
+		raise error
 
 def updateUser(user):
     try:
@@ -41,6 +42,7 @@ def updateUser(user):
     except mysql.connector.Error as error:
         connection.rollback()
         print("Falha ao atualizar registro de usuário no banco de dados!")
+		
 
 def listAllUsers():
     try:
@@ -55,6 +57,7 @@ def listAllUsers():
     except mysql.connector.Error as error:
         connection.rollback()
         print("Falha ao carregar a lista de usuários")
+		
 		
 
 def deleteUser(user):

@@ -65,7 +65,7 @@
             <div class="container-fluid agenda text-center margin">
                 <h3>Equipamentos</h3>
                 <br>
-
+            
                 <input class="form-control" type="text" placeholder="ID" id="id_equipamento">
                 <input class="form-control" type="text" placeholder="Nome do equipamento" id="nome_equipamento">
                 <div class="form-row">
@@ -79,25 +79,18 @@
                     </div>
                     <div class="row-b">
                         <select id="local" class="form-select" aria-label="Default select example">
-                            <option selected>Local</option>
+                            <option selected>Treche</option>
                             <option value="Mancal">Mancal</option>
                             <option value="Redutor">Redutor</option>
                             <option value="cxTransmissao">Caixa de transmissão</option>
                         </select>
-                    </div>
-                    <div class="row-c">
-                        <select id="frequencia_aplicacao" class="form-select" aria-label="Default select example">
-                            <option selected>Frequencia de aplicação</option>
-                            <option value="Mensal">Mensal</option>
-                            <option value="Semestral">Semestral</option>
-                            <option value="Anual">Anual</option>
-                        </select>
-                    </div>
+                    </div>                    
                     <div class="row-d">
-                        <button onclick="cadastrarEquipamentos()" type="submit" id="btn"
+                        <button onclick="cadastrar_equipamento()" type="submit" id="btn"
                             class="btn btn-primary">Cadastrar</button>
                     </div>
                 </div>
+            
             </div>
         </section>
 
@@ -119,6 +112,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="Controller/cadastrar_equipamento.js"></script>
+
+    <script src="{{url_for('static', filename='JScript/scriptCadastro.js')}}"></script>
 </footer>
 
 </html>

@@ -178,22 +178,39 @@ submit.addEventListener('click', function(e){
 
 });
 
-function cadastro(email, name, lastname, pass, confpass){   
 
-	$.ajax({
-		type: "POST", 
-		url: "http://localhost:5000/cadastro",
-		contentType: "application/json",
-		data: JSON.stringify({
-			login: email,
-			nome : name,
-			lastname: lastname, 
-			senha: pass,
-			confpass: confpass            
-		}),
-		sucess: function(result){			
-				alert(result)
-			
-		}
-	})
+function cadastrar_equipamento() {
+	let nome = document.getElementById("nome_equipamento").value;
+	let id = document.getElementById("id_equipamento").value;
+	let linha = document.getElementById("linha").value;
+	let local = document.getElementById("local").value;
+    
+	let dados_equipamento = {
+		id: id,
+        nome: nome,		
+		linha: linha,
+		trecho: local		
+    
+	}
+	fetch("/cadastro_maquinas",
+    {
+        method:"POST",
+        body:JSON.stringify(dados_equipamento),
+        headers:{
+            "Content-Type": "application/json"
+        }        
+    })    
+    .then((resposta) => {
+        
+        if (resposta.status == 200)
+            return resposta.text()
+        else 
+            return "Erro Ao Cadastrar o Equipamento"          
+    })
+    .then((respostaTexto) => {
+        alert(respostaTexto)
+    })  
+    
+    
 }
+
