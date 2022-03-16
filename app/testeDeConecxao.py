@@ -1,16 +1,13 @@
 import mysql.connector
 from mysql.connector import Error
 from user import User
-from flask.globals import request
 import UsuarioDAO
 from equipamento import Equipamento
+import EquipamentosDAO
+from connection import getConnection, closeConnection
 
 
 
+equipamento = User(8,None,None,None,None)
 
-
-
- 
- 
-equip = Equipamento(10, "TesteMaquina", "TesteLinha", "TesteTrecho")
-UsuarioDAO.insertEquipamentos(equip)
+UsuarioDAO.deleteUser(equipamento)

@@ -108,13 +108,15 @@ let senha = document.getElementById("password").value;
 }
 });
 
-submit.addEventListener('click', function(e){  
+submit.addEventListener('click', function(e){ 
 	if (document.getElementById('delete').value ==""){
 		e.preventDefault();
 
   validator.validate(form); 
 }
 });
+ 
+
 
 
  

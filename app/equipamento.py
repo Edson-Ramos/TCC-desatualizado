@@ -1,17 +1,17 @@
 
 class Equipamento:
 
-    def __init__(self, id, nome, linha, trecho):
-        self.id = id
+    def __init__(self, idMaq, nome, linha, trecho):
+        self.idMaq = idMaq
         self.nome = nome
         self.linha = linha
         self.trecho = trecho
 
 
-    def getId(self):
-        return self.id
-    def setId(self, id):
-        self.id = id
+    def getIdMaq(self):
+        return self.idMaq
+    def setIdMaq(self, idMaq):
+        self.idMaq = idMaq
 		
 
     def getNome(self):

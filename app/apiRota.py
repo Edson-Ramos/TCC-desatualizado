@@ -1,9 +1,11 @@
+from logging import exception
 import flask
 from flask.globals import request
 from flask.templating import render_template
 from equipamento import Equipamento
 from user import User
 import UsuarioDAO
+import EquipamentosDAO
 
 
 app = flask.Flask(__name__)
@@ -14,29 +16,32 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/cadastro', methods = ['GET'])
 def cadastro():
-	return render_template('cadastro.html')
+	return render_template('cadastrar_usuario.html')
 
 @app.route('/cadastro', methods=['POST'])
-def cadastro_post():	
-	nome = request.form['name']
-	sobreNome = request.form['lastname']
-	email = request.form['email']
-	senha = request.form['password']
-	confSenha = request.form['confpassword']
-	numbers = any(map(str.isdigit, senha))
-	uppercases = any(map(str.isupper, senha))
+def cadastro_post():
+	try:	
+		nome = request.form['name']
+		sobreNome = request.form['lastname']
+		email = request.form['email']
+		senha = request.form['password']
+		confSenha = request.form['confpassword']
+		numbers = any(map(str.isdigit, senha))
+		uppercases = any(map(str.isupper, senha))
 
-	if (senha != confSenha):
-		return render_template('cadastro.html')
-	if (uppercases == False):
-		return render_template('cadastro.html')
-	if (numbers == False):
-		return render_template('cadastro.html')
+		if (senha != confSenha):
+			return render_template('cadastro.html')
+		if (uppercases == False):
+			return render_template('cadastro.html')
+		if (numbers == False):
+			return render_template('cadastro.html')
 
-	usuario = User(None, nome, sobreNome, email, senha)
-	UsuarioDAO.insertUser(usuario)
-	return render_template('painel.html')
+		usuario = User(None, nome, sobreNome, email, senha)
+		UsuarioDAO.insertUser(usuario)
+		return "Usuário Cadastrado Com Sucesso!"
 
+	except:
+		return flask.Response("Erro Ao Cadastrar o usuário!", status=500)
 
 @app.route("/login", methods=['GET'])
 def login():			
@@ -51,7 +56,7 @@ def login_post():
 	for usuario in listUsuario:
 		if email == usuario.getEmail():
 			if senha == usuario.getSenha():
-				return render_template('painel.html')
+				return render_template('cadastro_maquinas.html')
 			else:
 				return 	"<h1>Senha Não Confere!</h1>"
 
@@ -68,18 +73,18 @@ def painel_post():
 
 @app.route('/delete', methods=['GET'])
 def delete():
-	return render_template('delete.html')
+	return render_template('deletar_usuarios.html')
 
 @app.route('/delete', methods=['POST'])
 def delete_post():
 	id = request.form['delete']
 	intId = int(id)
 	teste = User(intId,None,None,None,None)
-	listUsuario = UsuarioDAO.listAllUsers()
+	
 	
 	if id != True:
 		UsuarioDAO.deleteUser(teste)
-		return render_template('painel.html')
+		return render_template('deletar_usuarios.html')
 	else:
 		return 	"<h1>Id Não Existe!</h1>"
 
@@ -87,7 +92,7 @@ def delete_post():
 
 @app.route('/update', methods=['GET'])
 def update():
-	return render_template('update.html')
+	return render_template('atualizar_usuario.html')
 
 @app.route('/update', methods=['POST'])
 def update_post():
@@ -111,8 +116,6 @@ def update_post():
 def cadastro_maquinas():
 	return render_template('cadastro_maquinas.html')
 
-
-
 @app.route('/cadastro_maquinas', methods=['POST'])
 def cadastro_maquina_post():
 	try:
@@ -124,18 +127,16 @@ def cadastro_maquina_post():
 		print(dados)
 
 		equipamento = Equipamento(id_maquina, nome_maquina, linha, trecho)
-		UsuarioDAO.insertEquipamentos(equipamento)
+		EquipamentosDAO.insertEquipamentos(equipamento)
 		return "Equipamento Cadastrado com Sucesso!"
 
 	except:
 		return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500) 
 
-resposta = []
-resposta = UsuarioDAO.listAllUsers()
 
 @app.route("/listarUsuarios", methods=['GET'])
 def listar_usuarios():
-	return render_template('listarUsuarios.html')
+	return render_template('visualizar_funcionarios.html')
 
 @app.route("/listar", methods=['GET'])
 def listar_Usuarios_Get():
@@ -159,7 +160,65 @@ def listar_Usuarios_Get():
 	return(resposta)
 
 
-	
+@app.route("/visualizar_equipamentos", methods=['GET'])
+def listar_equipamentos():
+    return render_template('visualizar_equipamentos.html')
+
+@app.route("/visualizarEquipamentos", methods=['GET'])
+def listar_equipamentos_Get():
+    resposta = {'arquivos' : []}
+    
+    for dados in EquipamentosDAO.listarEquipamentos():
+        id_maquina = dados.idMaq
+        nome_maquina = dados.nome
+        linha_maquina = dados.linha
+        trecho_maquina = dados.trecho
+        
+        file = {'id' : id_maquina,
+                'nome' : nome_maquina,
+                'linha' : linha_maquina,
+                'trecho' : trecho_maquina}
+        
+        resposta ['arquivos'].append(file)
+        
+    return(resposta)
+
+@app.route('/atualizar_equipamentos', methods=['GET'])
+def atualizar_equipamentos():
+	return render_template('atualizar_equipamentos.html')
+
+@app.route('/atualizar_equipamentos', methods=['POST'])
+def atualizar_equipamentos_post():
+	try:
+		dados = request.get_json()
+		idMaq = dados["idMaq"]
+		idMaq = int(idMaq)
+		nomeMaq = dados["nomeMaq"]
+		linhaMaq = dados["linhaMaq"]
+		trechoMaq = dados["trechoMaq"]	
+
+		equipamento = Equipamento(idMaq, nomeMaq, linhaMaq, trechoMaq)
+		EquipamentosDAO.atualizarEquipamentos(equipamento)
+		return "Máquina Atualizar com Sucesso!"
+	except:
+     		return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500) 
+
+@app.route('/deletar_equipamentos', methods=['GET'])
+def deletar_equipamentos():
+	return render_template('deletar_equipamentos.html')
+
+@app.route('/deletar_equipamentos', methods=['POST'])
+def deletar_equipamentos_post():	
+	idMaq = request.form['delete']
+	idMaq = int(idMaq)
+	elemento = Equipamento(idMaq,None,None,None)	
+
+	if idMaq != True:
+		EquipamentosDAO.deleteEquipamento(elemento)
+		return render_template('deletar_equipamentos.html')
+	else:
+		return 	"<h1>Id Não Existe!</h1>"
+
 
 
 
