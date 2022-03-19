@@ -454,5 +454,30 @@ def deletar_spray_Post():
 		return "<h1>Id Não Existe!</h1>"
 
 
+
+@app.route('/cadastrar_servico', methods = ['GET'])
+def cadastrar_servico_Get():
+	return render_template('cadastrar_servico.html')
+@app.route('/cadastrar_servico', methods=['POST'])
+def cadastrar_servico_Post():
+	try:
+		dados_servico = request.get_json()
+		idServico = dados_servico["idServico"]
+		maquina = dados_servico["maquina"]	
+		linhaMaq = dados_servico["linhaMaq"]
+		trecho = dados_servico["trecho"]
+		tipLub = dados_servico["tipLub"]
+		dataAplic = dados_servico["dataAplic"]
+		obs = dados_servico["obs"]
+		print(dados_servico)
+
+		servico = Servico(idServico, maquina, linhaMaq, trecho, tipLub, dataAplic, obs )
+		servicosDAO.insertServico(servico)
+		return "Serviço cadatsrado com sucesso!"
+
+	except:
+		return flask.Response("Erro ao cadastrar serviço!", status=500) 
+
+
 if __name__=="__main__":
 	app.run()
