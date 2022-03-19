@@ -1,6 +1,7 @@
 
 
-function cadastrar_usuario() {
+function cadastrar_servico() {
+    debugger;
     let idServico = document.getElementById("idServico").value;
     let maquina = document.getElementById("maquina").value;
     let linhaMaq = document.getElementById("linhaMaq").value;
@@ -9,7 +10,8 @@ function cadastrar_usuario() {
     let dataAplic = document.getElementById("dataAplic").value
     var select = document.getElementById('freqAplic');
 	var value = select.options[select.selectedIndex].value;
-	var freqAplic = value;
+    var freqAplic = value;
+	
     let obs = document.getElementById("obs").value
 
     let dados_servico = {
