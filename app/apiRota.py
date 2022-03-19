@@ -469,9 +469,10 @@ def cadastrar_servico_Post():
 		tipLub = dados_servico["tipLub"]
 		dataAplic = dados_servico["dataAplic"]
 		obs = dados_servico["obs"]
+		freqAplic = dados_servico["freqAplic"]
 		print(dados_servico)
 
-		servico = Servico(idServico, maquina, linhaMaq, trecho, tipLub, dataAplic, obs )
+		servico = Servico(idServico, maquina, linhaMaq, trecho, tipLub, dataAplic, freqAplic, obs )
 		servicosDAO.insertServico(servico)
 		return "Serviço cadatsrado com sucesso!"
 

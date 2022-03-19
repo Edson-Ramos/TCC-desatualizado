@@ -13,7 +13,8 @@ body{
     max-height: fit-content;
     margin-top: 30px;
     text-align: center;
-    border-radius: 20px;    
+    border-radius: 20px;  
+    padding-bottom: 10px;  
 }
 .row-d{
     margin: 20px;
@@ -64,4 +65,7 @@ body{
     color: rgb(250, 248, 161)
 }
 
-
+.form-select {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
