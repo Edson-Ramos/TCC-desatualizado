@@ -21,7 +21,7 @@ body{
     padding: 20px
 }
 .navbar{
-    background: #0a090a;
+    background-color: #0a090a;
 }
 .dropdown-item {
     color: rgb(2, 90, 2)
@@ -52,6 +52,7 @@ body{
     margin-top: 60px;
     text-align: center;
     border-radius: 20px; 
+    margin-bottom: 60px;
 
 }
 .row-d{
@@ -69,3 +70,4 @@ body{
     margin-top: 20px;
     margin-bottom: 20px;
 }
+

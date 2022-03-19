@@ -479,6 +479,24 @@ def cadastrar_servico_Post():
 	except:
 		return flask.Response("Erro ao cadastrar serviço!", status=500) 
 
+@app.route('/visualizar_servico', methods=['GET'])
+def visualizar_servico_Get():
+    return render_template('visualizar_servico.html')
+@app.route('/visualizar_servico' , methods=['POST'])
+def visualizar_servico_Post():
+        resposta = {'arquivos' : []}
+        
+        for dados in LubrificantesDAO.listSpray():
+            idSpray = dados.idSpray
+            tipo = dados.tipos
+            consis = dados.consis
+            
+            file = {'id' : idSpray,
+                    'tipo' : tipo,
+                    'consis' : consis}
+            resposta ['arquivos'].append(file)
+            return(resposta)
+
 
 if __name__=="__main__":
 	app.run()
