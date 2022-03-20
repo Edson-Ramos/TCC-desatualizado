@@ -35,25 +35,25 @@ def updateServicos(servicos):
         connection.rollback()
         print("Falha ao atualizar registro de usuário no banco de dados!")
 
-def listAllUsers():
+def listAllServicos():
     try:
         sql_query = "SELECT * FROM servicos"
         cursor.execute(sql_query)
         result = cursor.fetchall()
         retorno = []
         for us in result:
-            user = User(us[0], us[1], us[2], us[3], us[4])
-            retorno.append(user)
+            servicos = Servicos(us[0], us[1], us[2], us[3], us[4])
+            retorno.append(servicos)
         return retorno
     except mysql.connector.Error as error:
         connection.rollback()
-        print("Falha ao carregar a lista de usuários")
+        print("Falha ao carregar a lista de serviços cadastrados")
         raise error
 	
 def deleteServicos(servicos):
 	try:
-		sql_query = """DELETE FROM `usuario` WHERE id = %s;"""%user.getId()
-		id_get = user.getId()		
+		sql_query = """DELETE FROM `servicos` WHERE id = %s;"""%user.getId()
+		id_get = servicos.getId()		
 		cursor.execute(sql_query)		
 		connection.commit()
 		print("Id: ", id_get, " Excluido com Sucesso!")

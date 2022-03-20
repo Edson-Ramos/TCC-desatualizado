@@ -1,17 +1,15 @@
 class Servicos:
 	def __init__(self, idServico, maquina, linhaMaq, trecho, tipLub, dataAplic, freqAplic, obs):
-		
 		self.idServico = idServico
-        self.maquina = maquina
+		self.maquina = maquina
 		self.linhaMaq = linhaMaq
 		self.trecho = trecho
 		self.tipLub = tipLub
 		self.dataAplic = dataAplic
-        self.freqAplic = freqAplic
-        self.obs = obs
+		self.freqAplic = freqAplic
+		self.obs = obs
 
-
-    def getIdServico(self):
+	def getIdServico(self):
 		return self.idServico
 	def setIdServico(self, idServico):
 		self.idServico = idServico
@@ -26,7 +24,7 @@ class Servicos:
 	def setLinhaMaq(self, linhaMaq):
 		self.linhaMaq = linhaMaq
 
-    def getTrecho(self):
+	def getTrecho(self):
 		return self.trecho
 	def setTrecho(self, trecho):
 		self.trecho = trecho
@@ -36,17 +34,17 @@ class Servicos:
 	def setTipLub(self, tipLub):
 		self.tipLub = tipLub
 
-    def getDataAplic(self):
+	def getDataAplic(self):
 		return self.dataAplic
 	def setDataAplic(self, dataAplic):
 		self.dataAplic = dataAplic
 
-    def getFreqAplic(self):
+	def getFreqAplic(self):
 		return self.freqAplic
 	def setFreqAplic(self, freqAplic):
 		self.freqAplic = freqAplic
 
-    def getObs(self):
+	def getObs(self):
 		return self.obs
 	def setObs(self, obs):
 		self.obs = obs
